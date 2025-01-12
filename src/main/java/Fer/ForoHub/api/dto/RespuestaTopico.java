@@ -11,4 +11,5 @@ public record RespuestaTopico(
         String autor,
         String curso,
         String respuesta
-) {}
+) {
+}
