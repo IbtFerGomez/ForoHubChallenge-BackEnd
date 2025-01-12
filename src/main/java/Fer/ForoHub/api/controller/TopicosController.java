@@ -17,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("v1/topicos")
+@RequestMapping("topicos")
 public class TopicosController {
 
     @Autowired
@@ -26,6 +26,7 @@ public class TopicosController {
     @PostMapping
     public ResponseEntity<RespuestaTopico> registrarTopico (@RequestBody @Valid CrearTopico crearTopico,
                                                             UriComponentsBuilder uriComponentsBuilder){
+
         Topicos topicos = topicoRepository.save(new Topicos(crearTopico));
         RespuestaTopico respuestaTopico = new RespuestaTopico(
                 topicos.getId(), topicos.getTitulo(), topicos.getMensaje(), topicos.getFechaDeCreacion(),
