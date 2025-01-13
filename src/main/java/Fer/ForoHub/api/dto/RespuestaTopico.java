@@ -1,5 +1,7 @@
 package Fer.ForoHub.api.dto;
 
+import Fer.ForoHub.api.entity.Topicos;
+
 import java.time.LocalDate;
 
 public record RespuestaTopico(
@@ -12,4 +14,4 @@ public record RespuestaTopico(
         String curso,
         String respuesta
 ) {
-}
+   }
