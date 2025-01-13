@@ -31,6 +31,8 @@ public class TopicosController {
     @Autowired
     private TopicoRepository topicoRepository;
 
+    //********************REGISTRAR TOPICO***************************//
+
     @PostMapping
     public ResponseEntity<Object> registrarTopico(@RequestBody @Valid CrearTopico crearTopico,
                                                   UriComponentsBuilder uriComponentsBuilder) {
@@ -58,13 +60,15 @@ public class TopicosController {
                     .body(new RespuestaTopicoError("Error al guardar el tópico debido a restricciones de integridad"));
         }
     }
+
+    //********************LISTA TODOS LOS TOPICO***************************//
     //Buscar todos los topicos
     @GetMapping ("/Todos")
     public Page<ListaTopicoRegistrados>listaTodosTopicosRegistrados (@PageableDefault(size = 10, sort = "fechaDeCreacion", direction = Sort.Direction.ASC) Pageable paginacion){
         return topicoRepository.findAll(paginacion).map(ListaTopicoRegistrados::new);
     }
 
-    //    //Buscar los topicos solo activos
+    //Buscar los topicos solo activos
     @GetMapping ("/Activos")
     public List<ListaTopicoRegistrados> listaTopicosActivosRegistrados() {
         List<Topicos> activos = topicoRepository.findByEstadoDelTopicoTrue();
@@ -73,6 +77,9 @@ public class TopicosController {
                 .map(ListaTopicoRegistrados::new)
                 .toList();
     }
+
+    //********************BUSCAR TOPICO POR CURSO Y AÑO***************************//
+
     // Buscar tópicos por nombre del curso y año de creación
     @GetMapping("/Buscar")
     public List<ListaTopicoRegistrados>
@@ -94,6 +101,8 @@ public class TopicosController {
                 .map(ListaTopicoRegistrados::new)
                 .toList();
     }
+
+    //********************DETALLE DE TOPICO***************************//
     //Detalle de tópicos
     @GetMapping("/{id}")
     public ResponseEntity<?> listarDetalleTopico(@PathVariable Long id) {
@@ -127,7 +136,9 @@ public class TopicosController {
 
         return ResponseEntity.ok(respuestaTopico);
     }
-    //***************Actualizar Topico*****//
+
+    //*******************ACTUALIZAR TOPICO***************************//
+
     @PutMapping ("/{id}")
     @Transactional
     public ResponseEntity actualizarTopico (@PathVariable Long id,
@@ -169,15 +180,20 @@ public class TopicosController {
         }
     }
     //********************DELETE TOPICO***************************//
-    @DeleteMapping("/{id}")
+
+    @DeleteMapping("Borrar/{id}")
     @Transactional
-    public ResponseEntity <Void> eliminarTopico(@PathVariable Long id) {
-        if (!topicoRepository.existsById(id)) {return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity eliminarTopico(@PathVariable Long id) {
+        var topicoOptional = topicoRepository.findById(id);
+        if (topicoOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         topicoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-    //********************DeSACTIVAR TOPICO***************************//
+
+    //*******************DeSACTIVAR TOPICO***************************//
+
     @DeleteMapping("Desactivar/{id}")
     @Transactional
     public ResponseEntity desactivarTopico(@PathVariable Long id) {
@@ -186,11 +202,12 @@ public class TopicosController {
         return ResponseEntity.noContent().build();
     }
     //********************ACTIVAR TOPICO***************************//
-    @DeleteMapping("Desactivar/{id}")
+
+    @DeleteMapping("Activar/{id}")
     @Transactional
     public ResponseEntity activarTopico(@PathVariable Long id) {
         Topicos topicos = topicoRepository.getReferenceById(id);
-        topicos.desactivarTopico();
+        topicos.activarTopico();
         return ResponseEntity.noContent().build();
     }
 
