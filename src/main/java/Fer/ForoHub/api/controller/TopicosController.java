@@ -6,8 +6,8 @@ import Fer.ForoHub.api.dto.DatosActualizarTopico;
 import Fer.ForoHub.api.dto.ListaTopicoRegistrados;
 import Fer.ForoHub.api.dto.RespuestaTopico;
 import Fer.ForoHub.api.entity.Topicos;
-import Fer.ForoHub.api.repository.TopicoRepository;
-import Fer.ForoHub.api.tatamientoErrores.RespuestaTopicoError;
+import Fer.ForoHub.api.repository.TopicoRepositorio;
+import Fer.ForoHub.api.infra.tratamientoErrores.RespuestaTopicoError;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ import java.util.List;
 public class TopicosController {
 
     @Autowired
-    private TopicoRepository topicoRepository;
+    private TopicoRepositorio topicoRepository;
 
     //********************REGISTRAR TOPICO***************************//
 

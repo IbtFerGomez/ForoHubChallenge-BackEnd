@@ -4,7 +4,7 @@ package Fer.ForoHub.api.controller;
 import Fer.ForoHub.api.dto.CrearRespuesta;
 import Fer.ForoHub.api.dto.RespuestaRespuesta;
 import Fer.ForoHub.api.entity.Respuesta;
-import Fer.ForoHub.api.repository.RespuestaRepository;
+import Fer.ForoHub.api.repository.RespuestaRepositorio;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ import java.net.URI;
 public class RespuestaController {
 
     @Autowired
-    private RespuestaRepository respuestaRepository;
+    private RespuestaRepositorio respuestaRepository;
 
     @PostMapping
     public ResponseEntity<RespuestaRespuesta> registrarRespuesta (@RequestBody @Valid CrearRespuesta crearRespuesta,

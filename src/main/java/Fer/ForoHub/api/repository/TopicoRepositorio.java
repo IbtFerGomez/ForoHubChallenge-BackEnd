@@ -5,10 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import java.util.Arrays;
 import java.util.List;
 
-public interface TopicoRepository extends JpaRepository <Topicos, Long> {
+public interface TopicoRepositorio extends JpaRepository <Topicos, Long> {
     boolean existsByTituloAndMensaje(String titulo, String mensaje);
 
     List<Topicos> findByEstadoDelTopicoTrue();

@@ -3,7 +3,7 @@ package Fer.ForoHub.api.controller;
 import Fer.ForoHub.api.dto.CrearCurso;
 import Fer.ForoHub.api.dto.RespuestaCurso;
 import Fer.ForoHub.api.entity.Curso;
-import Fer.ForoHub.api.repository.CursoRepository;
+import Fer.ForoHub.api.repository.CursoRepositorio;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.net.URI;
 public class CursoController {
 
     @Autowired
-    private CursoRepository cursoRepository;
+    private CursoRepositorio cursoRepository;
 
     @PostMapping
     public ResponseEntity <RespuestaCurso> registrarCurso (@RequestBody @Valid CrearCurso crearCurso,

@@ -19,7 +19,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 
-
 public class Topicos {
 
     @Id

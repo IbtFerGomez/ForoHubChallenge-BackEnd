@@ -1,4 +1,4 @@
-package Fer.ForoHub.api.tatamientoErrores;
+package Fer.ForoHub.api.infra.tratamientoErrores;
 
 public class RespuestaTopicoError {
     private String mensaje;
