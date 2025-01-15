@@ -3,6 +3,7 @@ package Fer.ForoHub.api.entity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,6 +25,7 @@ import java.util.List;
 public class UsuarioAutentificacion implements UserDetails {
 
 
+//    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -65,11 +67,13 @@ public class UsuarioAutentificacion implements UserDetails {
         return true;
     }
 
-    public String getLogin() {
+    public String   getLogin() {
         return login;
     }
 
     public Long getId() {
         return id;
     }
+
+
 }

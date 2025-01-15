@@ -1,7 +1,7 @@
-/*
 package Fer.ForoHub.api.infra.Seguridad;
 
 import Fer.ForoHub.api.repository.UsuarioAutentificacionRepositoro;
+import com.auth0.jwt.JWT;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,6 +14,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
+import static javax.management.Query.in;
+
 @Component
 public class FiltroDeSeguridad extends OncePerRequestFilter {
 
@@ -25,15 +27,20 @@ public class FiltroDeSeguridad extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+       /* if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Falta el token o no es válido.");
+            return;
+        }*/
 
         try {
             // Obtener el token del header
             var authHeader = request.getHeader("Authorization");
 
-            if (authHeader != null) {
+//            if (authHeader != null) {
                 var token = authHeader.replace("Bearer ", "");
-                var nombreUsuario = tokenServicio.getSubject(token); // extract username
-
+                var nombreUsuario = tokenServicio.getSubject(token);// extract username
+                System.out.println("nombreUsuario:"+nombreUsuario);
                 if (nombreUsuario != null) {
                     // Token valido
                     var usuario = usuarioAutentificacionRepositoro.findByLogin(nombreUsuario);
@@ -41,12 +48,14 @@ public class FiltroDeSeguridad extends OncePerRequestFilter {
                             usuario.getAuthorities()); // Forzamos un inicio de sesion
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
-            }
+//            }
+
             filterChain.doFilter(request, response);
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401
             response.getWriter().write("No autorizado: Token inválido o expirado.");
         }
+
+
     }
 }
-*/

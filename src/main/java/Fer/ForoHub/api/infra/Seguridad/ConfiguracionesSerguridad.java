@@ -21,9 +21,13 @@ public class ConfiguracionesSerguridad {
                 .csrf(csrf -> csrf.disable()) // NOTA: .disable() sigue disponible, pero explícitamente se define
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                ).authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login").permitAll() // Permitir acceso sin autenticación solo al endpoint /login
+                        .anyRequest().authenticated() // Requiere autenticación para cualquier otra solicitud
                 )
                 .build();
     }
+
     @Bean
     public AuthenticationManager authenticationManager (AuthenticationConfiguration authenticationConfiguration)
             throws Exception {
