@@ -40,11 +40,11 @@ public class TokenServicio {
 
     }
 
-    //+++++++++++++++++++++++obtener datos de validacion de token++++++++++++++++++++++++++++++++++++
+    //+++++++++++++++++++++++ datos de validacion de token++++++++++++++++++++++++++++++++++++
     public String getSubject(String token) {
-        /*if (token == null) {
+        if (token == null) {
             throw new RuntimeException();
-        }*/
+        }
         DecodedJWT verifier = null;
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret); // validando firma
@@ -63,6 +63,6 @@ public class TokenServicio {
     }
 
     private Instant generarFechaExpiracion() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-05:00"));
+        return LocalDateTime.now().plusHours(24).toInstant(ZoneOffset.of("-05:00"));
     }
 }
