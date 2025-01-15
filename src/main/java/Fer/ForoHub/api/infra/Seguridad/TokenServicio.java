@@ -14,7 +14,7 @@ import java.time.ZoneOffset;
 
 @Service
 public class TokenServicio {
-    
+
     @Value("${api.security.secret}")
     private String apiSecret;
 
@@ -22,10 +22,10 @@ public class TokenServicio {
 
         try {
             Algorithm algorithm = Algorithm.HMAC256(apiSecret);
-           return JWT.create()
+            return JWT.create()
                     .withIssuer("forohub")
-                   .withSubject(usuario.getLogin())
-                   .withClaim("id", usuario.getId())
+                    .withSubject(usuario.getLogin())
+                    .withClaim("id", usuario.getId())
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
             throw new RuntimeException();
