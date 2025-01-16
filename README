@@ -1,0 +1,23 @@
+# Proyecto ForoHub
+
+## Descripción
+Una aplicación de foro API REST, diseñada para gestionarse con autenticación y autorizaciones.
+
+## Tecnologías utilizadas
+- Java 17
+- Spring Boot
+- Jakarta EE
+- JWT
+
+## Instrucciones para ejecutar
+1. Clonar el repositorio:
+
+    git clone https://github.com/IbtFerGomez/ForoHubChallenge-BackEnd.git
+
+2. Configurar las propiedades del archivo ⁠ application.properties ⁠.
+3. Ejecutar la aplicación:
+
+    ./mvnw spring-boot:run
+     ⁠
+## Autor
+Equipo de desarrollo ForoHub. Fernando Gomez.

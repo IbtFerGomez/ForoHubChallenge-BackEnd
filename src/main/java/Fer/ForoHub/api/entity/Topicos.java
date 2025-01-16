@@ -2,10 +2,17 @@ package Fer.ForoHub.api.entity;
 
 import Fer.ForoHub.api.dto.CrearTopico;
 import Fer.ForoHub.api.dto.DatosActualizarTopico;
-import jakarta.persistence.*;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Setter;
 
 import java.time.LocalDate;
 

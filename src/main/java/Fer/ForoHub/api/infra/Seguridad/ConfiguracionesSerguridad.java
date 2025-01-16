@@ -7,10 +7,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,14 +24,16 @@ public class ConfiguracionesSerguridad {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
-                .csrf(csrf -> csrf.disable()) // NOTA: .disable() sigue disponible, pero explícitamente se define
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login").permitAll() // Permitir acceso sin autenticación solo al endpoint /login
-                        .anyRequest().authenticated())// Requiere autenticación para cualquier otra solicitud
-                        .addFilterBefore(filtroDeSeguridad, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class) // Registra el filtro antes del filtro de autenticación
-                        .build();
+            .csrf(AbstractHttpConfigurer::disable) // Disabling CSRF (not recommended for production)
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/login").permitAll() // Allow login without authentication
+                .anyRequest().authenticated() // Require authentication for all other requests
+            )
+            .addFilterBefore(filtroDeSeguridad, UsernamePasswordAuthenticationFilter.class)
+            .build();
     }
 
     @Bean

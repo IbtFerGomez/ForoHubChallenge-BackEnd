@@ -1,0 +1,1 @@
+ALTER TABLE curso ADD CONSTRAINT UNIQUE (nombre);

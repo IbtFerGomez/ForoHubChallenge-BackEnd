@@ -1,9 +1,7 @@
 package Fer.ForoHub.api.infra.Seguridad;
 
 import Fer.ForoHub.api.repository.UsuarioAutentificacionRepositoro;
-import com.auth0.jwt.JWT;
 import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +11,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-
-import static javax.management.Query.in;
 
 @Component
 public class FiltroDeSeguridad extends OncePerRequestFilter {
@@ -26,8 +22,7 @@ public class FiltroDeSeguridad extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-
+        throws IOException {
 
         try {
             // Obtener el token del header
@@ -64,6 +59,6 @@ public class FiltroDeSeguridad extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         String path = request.getServletPath();
-        return path.equals("/login"); // Excluir el endpoint /login del filtro
+        return path.equals("/login");
     }
 }
